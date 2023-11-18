@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Comerciales{%endblock%}</title>
+</head>
+<body class="bg-white">
+<h1>Comercial</h1>
+{%block content%}
+<div class="container">
+<table class="table">
+  <thead class="table-dark">
+  <tr class="tr">
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Fecha_nacimiento</th>
+      <th>Edad</th>
+      <th>Experiencia</th>
+      <th>Ocupacion</th>
+      <th>Departamento</th>
+      <th>Cantidad_contratos</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for comercial in comerciales %}
+    <th>{{ comercial.id}}</th>
+    <th>{{ comercial.nombre}}</th>
+    <th>{{ comercial.primer_apellido}} {{ comercial.segundo_apellido}}</th>
+    <th>{{ comercial.fecha_nacimiento}}</th>
+    <th>{{ comercial.edad}}</th>
+    <th>{{ comercial.annos_experiencia}} años</th>
+    <th>{{ comercial.ocupacion}}</th>
+    <th>{{ comercial.id_departamento}}</th>
+    <th>{{ comercial.cantidad_contratos}}</th>
+
+  </tbody>
+</table>
+</div>
+     {% endfor %}
+
+{{form.as_p}}
+     <button class= "btn btn-primary" type = "submmit">Enviar</button>
+{%endblock%}
+
+</body>
+</html>

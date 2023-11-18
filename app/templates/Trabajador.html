@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Insertar Trabajador{% endblock %}</title>
+</head>
+<body>
+<h1>
+    Trabajador
+</h1>
+{% block content %}
+
+    {{form.as_p}}
+     <button type = "submmit">Enviar</button>
+
+{% endblock %}
+</body>
+</html>

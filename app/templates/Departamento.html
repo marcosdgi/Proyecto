@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{%extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html"%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Departamentos{%endblock%}</title>
+</head>
+<body>
+{%block content%}
+    <form action="" method="post"> {% csrf_token %}
+
+{{form.as_p}}
+     <button type = "submmit">Enviar</button>
+
+{%endblock   %}
+         {% for comercial in comerciales %}
+            <hr>
+
+            <div class="container_G">
+
+                <p class="th">{{ comercial.id}}</p>
+                <p class="th">{{ comercial.nombre}}</p>
+
+
+            </div>
+
+     {% endfor %}
+<button>Eliminar</button>
+<button>Editar</button>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+</head>
+<body>
+
+<div>
+    <nav class="navbar">
+   <div>
+     <ul>
+       <div>
+         <li><a href="{% url 'trabajador' %}">Trabajadores</a></li>
+          <div>
+              <li><a href="{% url 'director' %}">Directores</a></li>
+              <li><a href="{% url 'comercial' %}">Comerciales</a></li>
+              <li><a href="{% url 'asistente' %}">Asistentes de Control </a> </li>
+          </div>
+       </div>
+
+       <li><a href="{% url 'producto' %}">Productos</a></li>
+       <li><a href="">Suministradores</a></li>
+       <li><a href="{% url 'abogado' %}">Abogados</a></li>
+       <li><a href="{% url 'contrato' %}">Contratos</a></li>
+       <div>
+          <li><a href="{% url 'departamento' %}">Departamentos</a></li>
+          <ul>
+            <li><a href="{% url 'departamentocomercial' %}">Comerciales</a></li>
+          </ul>
+          <ul><a href="{% url 'departamentolegal' %}">Legales</a>
+              <ul><a href="{% url 'division' %}">Divisiones</a>
+
+              </ul>
+          </ul>
+       </div>
+     </ul>
+   </div>
+
+ </nav>
+</div>
+
+</body>
+</html>

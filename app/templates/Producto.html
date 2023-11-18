@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Productos{%endblock%}</title>
+</head>
+<body>
+{% block content %}
+
+
+{{form.as_p}}
+    <button type = "submmit">Enviar</button>
+    <button onclick="window.location.href='/1/borrar'">Eliminar</button>
+    <button>Editar</button>
+{% endblock %}
+</body>
+</html>
