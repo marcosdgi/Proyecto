@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-{%extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html"%}
+{% extends "Base.html" %}
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Departamento Legal{%endblock%}</title>
+    <title>{%block title%}Suministrador{%endblock%}</title>
 </head>
-<body>
+<body class="bg-white">
+<h1>Division</h1>
 {%block content%}
+<div class="container">
+<table class="table">
+  <thead class="table-dark">
+  <tr class="tr">
+      <th>Id</th>
+      <th>Descripcion</th>
+      <th>Nombre</th>
+      <th>Direccion</th>
+      <th>Año</th>
+  </thead>
+  <tbody>
+  {% for departamento in departamentolegal %}
+    <th>{{ departamento.id}}</th>
+    <th>{{ departamento.descripcion}}</th>
+    <th>{{ departamento.nombre}} </th>
+    <th>{{ departamento.ano}}</th>
 
-{{form.as_p}}
-     <button type = "submmit">Enviar</button>
-<button>Eliminar</button>
-<button>Editar</button>
+  </tbody>
+     {% endfor %}
+</table>
+    {%endblock%}
+</div>
 
-{%endblock   %}
 </body>
 </html>

@@ -8,7 +8,7 @@ from app.Forms.AbogadoForm import AbogadoForm
 def abogado_list(request):
     abogados = Abogado.objects.all()
     return render(request, 'Abogado.html',
-                  {'abogadoes': abogados})
+                  {'abogados': abogados})
 
 def abogado_detail(request, pk):
     abogado = get_object_or_404(Abogado, pk=pk)

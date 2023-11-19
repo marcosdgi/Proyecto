@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+{% extends "Base.html" %}
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{%block title%}Productos{%endblock%}</title>
+    <title>{%block title%}Suministrador{%endblock%}</title>
 </head>
-<body>
-{% block content %}
+<body class="bg-white">
+{%block content%}
+<h1>Productos</h1>
+<div class="container">
+<table class="table">
+  <thead class="table-dark">
+  <tr class="tr">
+      <th>Id</th>
+      <th>Suministrador</th>
+      <th>Descripcion</th>
+      <th>Producido</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for producto in productos %}
+    <th>{{ producto.id}}</th>
+    <th>{{ producto.id_suministrador}}</th>
+    <th>{{ producto.descripcion}} </th>
+    <th>{{ producto.fecha_produccion}}</th>
 
+  </tbody>
+     {% endfor %}
+</table>
+    {%endblock%}
+</div>
 
-{{form.as_p}}
-    <button type = "submmit">Enviar</button>
-    <button onclick="window.location.href='/1/borrar'">Eliminar</button>
-    <button>Editar</button>
-{% endblock %}
 </body>
 </html>

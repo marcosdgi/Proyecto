@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+{% extends "Base.html" %}
 
 <html lang="en">
 <head>
@@ -37,13 +37,12 @@
     <th>{{ comercial.cantidad_contratos}}</th>
 
   </tbody>
-</table>
-</div>
      {% endfor %}
+</table>
 
 {{form.as_p}}
-     <button class= "btn btn-primary" type = "submmit">Enviar</button>
-{%endblock%}
+    {%endblock%}
+</div>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{%extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html"%}
+{%extends "Base.html"%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,26 +7,31 @@
 </head>
 <body>
 {%block content%}
-    <form action="" method="post"> {% csrf_token %}
+<div class="container">
+<table class="table">
+  <thead class="table-dark">
+  <tr class="tr">
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Direccion</th>
+      <th>Descripcion</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for departamento in departamentos %}
+    <th>{{ departamento.id}}</th>
+    <th>{{ departamento.nombre}}</th>
+    <th>{{ departamento.direccion}}</th>
+    <th>{{ departamento.descripcion}}</th>
+
+
+  </tbody>
+ {% endfor %}
+</table>
 
 {{form.as_p}}
-     <button type = "submmit">Enviar</button>
+{%endblock%} %}
 
-{%endblock   %}
-         {% for comercial in comerciales %}
-            <hr>
-
-            <div class="container_G">
-
-                <p class="th">{{ comercial.id}}</p>
-                <p class="th">{{ comercial.nombre}}</p>
-
-
-            </div>
-
-     {% endfor %}
-<button>Eliminar</button>
-<button>Editar</button>
-
+</div>
 </body>
 </html>

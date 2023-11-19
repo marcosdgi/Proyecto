@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+{% extends "Base.html" %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Director{% endblock %}</title>
 </head>
 <body>
-<h1>Director</h1>
 {%block content%}
+<h1>Directores</h1>
 <div class="container">
 <table class="table">
   <thead class="table-dark">
@@ -36,12 +36,12 @@
     <th>{{ director.grado_adademico}}</th>
 
   </tbody>
-</table>
-</div>
      {% endfor %}
-
+</table>
 {{form.as_p}}
-     <button class= "btn btn-primary" type = "submmit">Enviar</button>
 {%endblock%}
+</div>
+
+
 </body>
 </html>

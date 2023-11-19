@@ -8,7 +8,7 @@ from app.Forms.DepartamentoForm import DepartamentoForm
 def departamento_list(request):
     departamentos = BaseDepartamento.objects.all()
     return render(request, 'Departamento.html',
-                  {'departamentoes': departamentos})
+                  {'departamentos': departamentos})
 
 def departamento_detail(request, pk):
     departamento = get_object_or_404(BaseDepartamento, pk=pk)

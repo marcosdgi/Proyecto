@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+{% extends "Base.html" %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,8 +23,9 @@
       <th>Division</th>
   </tr>
   </thead>
-  <tbody> {% for abogado in abogados %}
-    <th>{{ .id}}</th>
+  <tbody>
+    {% for abogado in abogados %}
+    <th>{{ abogado.id}}</th>
     <th>{{ abogado.nombre}}</th>
     <th>{{ abogado.primer_apellido}} {{ abogado.segundo_apellido}}</th>
     <th>{{ abogado.fecha_nacimiento}}</th>
@@ -35,14 +36,11 @@
     <th>{{ abogado.division}}</th>
 
   </tbody>
-</table>
-</div>
      {% endfor %}
-
+</table>
 {{form.as_p}}
-    <button type = "submmit">Enviar</button>
-    <button>Eliminar</button>
-    <button>Editar</button>
 {% endblock %}
+</div>
+
 </body>
 </html>

@@ -12,6 +12,7 @@ from app.views.DepartamentoView import departamento_edit,departamento_list,depar
 from app.views.ProductoView import producto_new,producto_edit,producto_list,producto_delete,producto_detail
 from app.views.DepartamentoLegalView import departamentolegal_list,departamentolegal_new,departamentolegal_edit,departamentolegal_delete,departamentolegal_detail
 from app.views.DepartamentoComercialVIew import departamentocomercial_delete, departamentocomercial_edit,departamentocomercial_list,departamentocomercial_new,departamentocomercial_detail
+from app.views.SuministradorView import suministrador_delete,suministrador_new,suministrador_edit,suministrador_list
 
 urlpatterns = [
     path('trabajador/', trabajador_list, name='trabajador'),
@@ -78,7 +79,14 @@ urlpatterns = [
     path('departamentocomercial/', departamentocomercial_list, name='departamentocomercial'),
     path('departamentocomercial/nuevo/', departamentocomercial_new, name='departamentocomercial_nuevo'),
     path('departamentocomercial/<int:pk>/editar/', departamentocomercial_edit, name='departamentocomercial_editar'),
-    path('departamentocomercial/<int:pk>/borrar/', departamentocomercial_delete, name='departamentocomercial_borrar')
+    path('departamentocomercial/<int:pk>/borrar/', departamentocomercial_delete, name='departamentocomercial_borrar'),
+
+    #Suministrador
+    path('suministrador/', suministrador_list, name='suministrador'),
+    path('suministrador/nuevo/', suministrador_new, name='suministrador_nuevo'),
+    path('suministrador/<int:pk>/editar/', suministrador_edit,name='suministrador_editar'),
+    path('suministrador/<int:pk>/borrar/', suministrador_delete,name='suministrador_borrar')
+
               ]+[
     #rutas de la pagina
     path('',inicio, name = 'inicio' )

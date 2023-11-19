@@ -1,19 +1,45 @@
 <!DOCTYPE html>
-{% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html" %}
+{% extends "Base.html" %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Insertar Trabajador{% endblock %}</title>
+    <title>{% block title %}Director{% endblock %}</title>
 </head>
 <body>
-<h1>
-    Trabajador
-</h1>
-{% block content %}
+{%block content%}
+<h1 class="H1">Trabajadores</h1>
+<div class="container">
+<table class="table">
+  <thead class="table-dark">
+  <tr class="tr">
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Fecha_nacimiento</th>
+      <th>Edad</th>
+      <th>Experiencia</th>
+      <th>Ocupacion</th>
+      <th>Departamento</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for trabajador in trabajadores %}
+    <th>{{ trabajador.id}}</th>
+    <th>{{ trabajador.nombre}}</th>
+    <th>{{ trabajador.primer_apellido}} {{ trabajador.segundo_apellido}}</th>
+    <th>{{ trabajador.fecha_nacimiento}}</th>
+    <th>{{ trabajador.edad}}</th>
+    <th>{{ trabajador.annos_experiencia}} años</th>
+    <th>{{ trabajador.ocupacion}}</th>
+    <th>{{ trabajador.id_departamento}}</th>
 
-    {{form.as_p}}
-     <button type = "submmit">Enviar</button>
+  </tbody>
+     {% endfor %}
+</table>
+{{form.as_p}}
+{%endblock%}
+</div>
 
-{% endblock %}
+
 </body>
 </html>

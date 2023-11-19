@@ -6,27 +6,29 @@
     <title>{%block title%}Suministrador{%endblock%}</title>
 </head>
 <body class="bg-white">
-<h1>Division</h1>
+<h1>Suministrador</h1>
 {%block content%}
 <div class="container">
 <table class="table">
   <thead class="table-dark">
   <tr class="tr">
       <th>Id</th>
-      <th>Descripcion</th>
       <th>Nombre</th>
-      <th>Direccion</th>
-      <th>Año</th>
+      <th>Calle</th>
+      <th>Num Calle</th>
+      <th>Municipio</th>
+      <th>Provincia</th>
       <th>Clasificacion</th>
   </tr>
   </thead>
   <tbody>
-  {% for division in divisiones %}
-    <th>{{ division.id}}</th>
-    <th>{{ division.descripcion}}</th>
-    <th>{{ division.nombre}} </th>
-    <th>{{ division.ano}}</th>
-    <th>{{ division.clasificacion}} años</th>
+  {% for suministrador in suministrador %}
+    <th>{{ suministrador.id}}</th>
+    <th>{{ suministrador.nombre}}</th>
+    <th>{{ suministrador.numero_calle}} </th>
+    <th>{{ suministrador.municipio}}</th>
+    <th>{{ suministrador.provincia}}</th>
+    <th>{{ suministrador.clasificacion}} años</th>
 
   </tbody>
      {% endfor %}

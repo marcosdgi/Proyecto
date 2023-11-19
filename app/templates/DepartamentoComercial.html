@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{%extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html"%}
+{%extends "Base.html"%}
 
 <html lang="en">
 <head>
@@ -8,12 +8,37 @@
 </head>
 <body>
 {%block content%}
+<div class="container">
+<table class="table">
+  <thead class="table-dark">
+  <tr class="tr">
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Codigo</th>
+      <th>Descripcion</th>
+      <th>Fecha Comunicacion</th>
+      <th>Departamento Legal</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for departamento in departamentocomercial %}
+    <th>{{ departamento.id}}</th>
+    <th>{{ departameto.nombre}}</th>
+    <th>{{ departameto.codigo}}</th>
+    <th>{{ departameto.descripcion}}</th>
+    <th>{{ departameto.fecha_comunicacion}}</th>
+    <th>{{ departameto.id_DepartamentoLegal}}</th>
 
+
+  </tbody>
+ {% endfor %}
+</table>
 {{form.as_p}}
-     <button type = "submmit">Enviar</button>
-<button>Eliminar</button>
-<button>Editar</button>
-
 {%endblock%}
+</div>
+
+
+
+
 </body>
 </html>
