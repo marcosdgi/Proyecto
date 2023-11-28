@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
 from app.models.Producto import Producto
@@ -5,43 +7,24 @@ from app.Forms.ProductoForm import ProductoForm
 
 
 
-def producto_list(request):
-    productos = Producto.objects.all()
-    return render(request, 'Producto.html',
-                  {'productoes': productos})
 
-def producto_detail(request, pk):
-    producto = get_object_or_404(Producto, pk=pk)
-    return render(request, 'Producto.html',
-                  {'producto': producto})
 
-def producto_new(request):
-    if request.method == "POST":
-        form = ProductoForm(request.POST)
-        if form.is_valid():
-            producto = form.save()
-            return redirect('Index.html', pk=producto.pk)
+def buscar_producto(request):
+    query = request.GET.get('q', '')
+    campo = request.GET.get('campo', '')
+
+    if query:  # Solo filtrar si se proporciona un término de búsqueda
+        if campo:
+            kwargs = {f'{campo}__icontains': query}
+            resultados = Producto.objects.filter(**kwargs)
+        else:
+            q_objects = Q()
+            for field in Producto._meta.fields:
+                q_objects |= Q(**{f'{field.name}__icontains': query})
+            resultados = Producto.objects.filter(q_objects)
     else:
-        form = ProductoForm()
-    return render(request, 'Producto.html',
-                  {'form': form})
+        resultados = Producto.objects.all()  # Devolver todos los objetos si no se proporciona un término de búsqueda
 
-def producto_edit(request, pk):
-    producto = get_object_or_404(Producto, pk=pk)
-    if request.method == "POST":
-        form = ProductoForm(request.POST, instance=producto)
-        if form.is_valid():
-            producto = form.save()
-            return redirect('producto_detail', pk=producto.pk)
-    else:
-        form = ProductoForm(instance=producto)
-    return render(request, 'Producto.html',
-                  {'form': form})
+    campos = [field.name for field in Producto._meta.fields]
+    return render(request, 'Producto.html', {'resultados': resultados, 'campos': campos})
 
-def producto_delete(request, pk):
-    producto = get_object_or_404(Producto, pk=pk)
-    if request.method == 'POST':
-        producto.delete()
-        return redirect('productoes')
-    return render(request, 'Producto.html',
-                  {'object': producto})

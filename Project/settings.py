@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 ]+[
     'base',
     'app',
+    'autenticacion'
     ]
 
 MIDDLEWARE = [
@@ -57,7 +58,9 @@ ROOT_URLCONF = 'Project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/Developer/Desktop/proyecto/app/templates'],
+        'DIRS': ['C:/Users/Developer/Desktop/proyecto/app/templates',
+                 'C:/Users/Developer/Desktop/proyecto/auth/templates',
+               'C:/Users/Developer/Desktop/proyecto/autenticacion/templates/registration'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -106,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -123,3 +126,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'inicio_sesion'
+AUTHENTICATION_BACKENDS = [
+       'django.contrib.auth.backends.ModelBackend',
+   ]
+LOGIN_REDIRECT_URL = 'inicio'
+# settings.py
+LOGOUT_REDIRECT_URL = 'login'

@@ -1,44 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Navbar</title>
 </head>
+
 <body>
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'logout' %}" style="padding-top: 5px;display: flex;justify-content: end;">
+        {% csrf_token %}
+        <input type="submit" value="Cerrar sesión" style="background-color: rgb(5, 5, 5);">
+    </form>
+    {%else%}
+    <form method="post" action="{% url 'logout' %}" style="padding-top: 5px;display: flex;flex-wrap: wrap;">
+        {% csrf_token %}
+        <input type="submit" value="Iniciar Sesion" style="background-color: rgb(5, 5, 5);">
 
-<div>
-    <nav class="navbar">
-   <div>
-     <ul>
-       <div>
-         <li><a href="{% url 'trabajador' %}">Trabajadores</a></li>
-          <div>
-              <li><a href="{% url 'director' %}">Directores</a></li>
-              <li><a href="{% url 'comercial' %}">Comerciales</a></li>
-              <li><a href="{% url 'asistente' %}">Asistentes de Control </a> </li>
-          </div>
-       </div>
+        {%endif%}
 
-       <li><a href="{% url 'producto' %}">Productos</a></li>
-       <li><a href="{% url 'suministrador' %}">Suministradores</a></li>
-       <li><a href="{% url 'abogado' %}">Abogados</a></li>
-       <li><a href="{% url 'contrato' %}">Contratos</a></li>
-       <div>
-          <li><a href="{% url 'departamento' %}">Departamentos</a></li>
-          <ul>
-            <li><a href="{% url 'departamentocomercial' %}">Comerciales</a></li>
-          </ul>
-          <ul><a href="{% url 'departamentolegal' %}">Legales</a>
-              <ul><a href="{% url 'division' %}">Divisiones</a>
+        <nav class="nav" style="display: flow;margin-left: 0;border-radius: 8px;
+    box-shadow: black 5px 10px 10px;" ">
+        <ul class=" accordion-menu" style="padding: 0;padding-left: 15px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div class="menu" style="font-size: xx-large;font-weight: bold;"> Menú</div>
+                {%load static%}
+                <div class="logo" style="padding-top: 15px;"><img src="{% static 'css/portada3.jpg' %}" style="width: 120px;
+                    border-radius: 59px;
+                    padding-left: -48px;
+                    margin: 0 52px;
+                    padding: ;
+                    "></div>
+            </div>
+            <li>
+                <a href="{% url 'inicio' %}">Inicio</a>
+            <li>
+                {% if user.is_authenticated %}
+                <a href="{% url 'trabajador' %}">Trabajadores</a>
+                {%endif%}
+                <ul>
+                    <li><a href="{% url 'director' %}">Directores</a></li>
+                    <li><a href="{% url 'comercial' %}">Comerciales</a></li>
+                    <li><a href="{% url 'asistente' %}">Asistentes de Control</a></li>
+                    <li><a href="{% url 'abogado' %}">Abogados</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'producto' %}">Productos</a></li>
+            <li><a href="{% url 'suministrador' %}">Suministradores</a></li>
+            <li>{%if user.is_authenticated%}<a href="{% url 'contrato' %}">Contratos</a>{%endif%}</li>
 
-              </ul>
-          </ul>
-       </div>
-     </ul>
-   </div>
+            <li>{% if user.is_authenticated%}<a href="{% url 'informe' %}">Informes</a>{%endif%}</li>
+            <li>{%if user.is_authenticated%}
+                <a href="{% url 'departamento' %}">Departamentos</a>
+                {%endif%}
+                <ul>
+                    <li><a href="{% url 'departamentocomercial' %}">Comerciales</a></li>
+                    <li>
+                        <a href="{% url 'departamentolegal' %}">Legales</a>
+                        <ul>
+                            <li><a href="{% url 'division' %}">Divisiones</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
 
- </nav>
-</div>
+            </ul>
+        </nav>
 
 </body>
+
 </html>

@@ -1,20 +1,185 @@
 <!DOCTYPE html>
 {% extends "C:/Users/Developer/Desktop/proyecto/app/templates/Base.html"%}
 <html lang="en">
-<head>
 
+<head>
+    {%load static %}
     <meta charset="UTF-8">
     <title>{% block title%}Inicio{%endblock%}</title>
 
 </head>
-<body>
-<div>
-    <h1>Gestionador</h1>
-</div>
-{%block content%}
- <h2 class="h2">Probando</h2>
-{% endblock %}
 
+<body>
+
+    {%block content%}
+    <header class="he">
+        <section class="inicio">
+            <h1 style="text-shadow: black 3px 3px 3px;backdrop-filter: blur(5px);">Empresa Nacional de Materias Primas
+            </h1>
+            <h2 style="text-shadow: black 3px 3px 3px;backdrop-filter: blur(5px);">La desesperación es la materia prima
+                del cambio drástico...</h2>
+        </section>
+        <div class="ola" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #fff;"></path>
+            </svg></div>
+    </header>
+    <main>
+        <section id="about" style="margin-top: 30px; margin-bottom: 100px;">
+            <h2 class="titulo">Sobre la Empresa</h2>
+            <div class="contenedor-sobre-nosot">
+                <img src="{% static 'css/portada3.jpg' %}" class="imagen-abaut-us" style="  width: 253px;
+                border-radius: 10px;">
+                <div class="contenido-textos">
+                    <p> La materia prima es el primer eslabón de una cadena de fabricación, y en las distintas fases del
+                        proceso se irán transformando hasta convertirse en un producto apto para el consumo. El costo
+                        final del producto incluye el costo de cada materia prima y el valor del proceso aplicado. La
+                        demanda de materias primas en la sociedad industrial es constante y abundante. Hay numerosos
+                        tipos y formas de materia prima, tantos como procesos de elaboración. Sus mecanismos de
+                        obtención también son diversos, ya que algunas materias primas están directamente a nuestro
+                        alcance y otras deben ser buscadas en las profundidades de la corteza terrestre (minería), en el
+                        fondo de los mares o incluso deben ser derivados o sintetizados a partir de otras materias
+                        primas.</p>
+                    <p>Somos una empresa dedicada a la adquisición de bienes o materias primas para transformarlas y
+                        comercializarlas,mediante la utilizacion de herramientas y equipos especializados dependiendo
+                        del sector de trabajo,con el objetivo final de conseguir un producto elaborado o semielaborado a
+                        partir de los materiales o bienes que se obtuvieron y procesaron.</p>
+                </div>
+            </div>
+        </section>
+        <section id="portafolio" class="sectionBG">
+            <div id="contenedor">
+                <h2 class="titulo">Portafolio</h2>
+                <div class="imagenes-contenedor">
+                    <img src="{% static 'css/22.jfif' %}">
+                    <img src="{% static 'css/21.jfif' %}">
+                    <img src="{% static 'css/20.jfif' %}" id="fixx">
+                    <img src="{% static 'css/24.jfif' %}">
+                </div>
+        </section>
+        <section id="servicios" class="sectionBG" style="border-radius: 10px 10px 0 0;">
+            <div id="contenedor">
+                <h2 id="titulo" class="titulo">Nuestros Servicios</h2>
+                <div class="servicio-count">
+                    <div>
+                        <div class="servicio-ind">
+                            <a href="{% url 'departamento' %}" id="pr">
+                                <img src="{% static 'css/7.jpg' %}">
+                                Departamentos
+                            </a>
+                        </div>
+                        <div class="servicio-ind">
+                            <a href="{% url 'trabajador' %}" id="pr">
+                                <img src="{% static 'css/8.jpg' %}">
+                                Empleados
+                            </a>
+                        </div>
+                        <div class="servicio-ind">
+                            <a href="{% url 'informe' %}" id="pr">
+                                <img src="{% static 'css/1.jpg' %}">
+                                Informes
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="servicio-ind">
+                            <a href="{% url 'producto' %}" id="pr">
+                                <img src="{% static 'css/9.jpg' %}">
+                                Productos
+                            </a>
+                        </div>
+                        <div class="servicio-ind">
+                            <a href="{% url 'suministrador' %}" id="pr">
+                                <img src="{% static 'css/4.jpg' %}">
+                                Suministradores
+                            </a>
+                        </div>
+                        <div class="servicio-ind">
+                            <a href="{% url 'contrato' %}" id="pr">
+                                <img src="{% static 'css/5.jpg' %}">
+                                Contratos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <footer style="background-color: gray; padding: 20px;">
+
+        <div class="div_final">
+            <div>
+
+                <h4 style="color: black;margin: 0;">Teléfono</h4>
+                <p style="color: black;margin: 0;">54082880</p>
+            </div>
+
+            <div>
+
+                <h4 style="color: black;margin: 0;">Email</h4>
+                <p style="color: black;margin: 0;">cinthyabvd@estudiantes.uci.cu</p>
+            </div>
+            <div>
+
+                <h4 style="color: black;margin: 0;">Localidad</h4>
+                <p style="color: black;margin: 0;">144-206, UCI, La Habana</p>
+
+            </div>
+        </div>
+        <h2 class="titulo_final">&copy; Cinthya | Aliana | Amanda G. | Sabrina </h2>
+    </footer>
+
+
+
+
+    <!-- <div style="display: flex; justify-content: center">
+
+        <div>
+            <div style="display: flex;justify-content: center;">
+                <h1 style="text-align: center;">¿Quienes Somos?</h1>
+            </div>
+            <div style="display: inline-flex;text-align: -moz-center;padding-bottom: 30px;padding: 8px;padding-bottom: 8px;margin: -16px;padding-bottom: 50px;">
+                <img src="" width="400px" alt="">
+                <p style=" text-align:left; font-size: 25px; font-style: italic; font-weight: bold;">
+                    Somos una empresa convencional comprometida con la excelencia, la innovación y la integridad.
+                    Nuestra misión es proporcionar productos y servicios de alta calidad que satisfagan las necesidades
+                    de nuestros clientes.
+
+                </p>
+            </div>
+            <div style=" text-align: -moz-center ; padding-bottom: 50px;">
+                <div style="padding: 10px;">
+                    <h3> Nuestro Equipo</h3>
+
+                    <p>Está compuesto por profesionales altamente capacitados y dedicados. Gestionamos a nuestros
+                        trabajadores con respeto y equidad, fomentando un ambiente de trabajo positivo y productivo.
+                        Dentro de nuestra página web, ofrecemos una plataforma intuitiva para la administración y
+                        gestión de nuestros empleados.</p>
+
+                    <h3> Nuestros Productos</h3>
+                </div>
+                Ofrecemos una amplia gama de productos diseñados para satisfacer diversas necesidades del mercado. Nos
+                enorgullece la calidad y la innovación que caracterizan a cada uno de nuestros productos.
+
+                <h3>Nuestros Proveedores</h3>
+
+                Trabajamos con proveedores de confianza que comparten nuestros valores de calidad e integridad. Nuestros
+                proveedores desempeñan un papel crucial en nuestro compromiso de ofrecer productos excepcionales a
+                nuestros clientes.
+
+                <h3>Nuestros Departamentos</h3>
+
+                Nuestra empresa está compuesta por varios departamentos, cada uno dedicado a un aspecto específico de
+                nuestras operaciones. Esto incluye producción, ventas, marketing, recursos humanos, y más. Cada
+                departamento desempeña un papel vital en el éxito de nuestra empresa.
+
+            </div>
+        </div>
+    </div> -->
+    {% endblock %}
 
 </body>
+
 </html>

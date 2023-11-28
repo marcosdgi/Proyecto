@@ -1,47 +1,27 @@
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
 from app.models.Division import Division
 from app.Forms.DivisionForm import DivisionForm
 
 
+@login_required()
+def buscar_division(request):
+    query = request.GET.get('q', '')
+    campo = request.GET.get('campo', '')
 
-def division_list(request):
-    divisiones = Division.objects.all()
-    return render(request, 'Division.html',
-                  {'division': divisiones})
-
-def division_detail(request, pk):
-    division = get_object_or_404(Division, pk=pk)
-    return render(request, 'Division.html',
-                  {'division': division})
-
-def division_new(request):
-    if request.method == "POST":
-        form = Division(request.POST)
-        if form.is_valid():
-            division = form.save()
-            return redirect('Index.html', pk=division.pk)
+    if query:  # Solo filtrar si se proporciona un término de búsqueda
+        if campo:
+            kwargs = {f'{campo}__icontains': query}
+            resultados = Division.objects.filter(**kwargs)
+        else:
+            q_objects = Q()
+            for field in Division._meta.fields:
+                q_objects |= Q(**{f'{field.name}__icontains': query})
+            resultados = Division.objects.filter(q_objects)
     else:
-        form = DivisionForm()
-    return render(request, 'Division.html',
-                  {'form': form})
+        resultados = Division.objects.all()  # Devolver todos los objetos si no se proporciona un término de búsqueda
 
-def division_edit(request, pk):
-    division = get_object_or_404(Division, pk=pk)
-    if request.method == "POST":
-        form = DivisionForm(request.POST, instance=division)
-        if form.is_valid():
-            division = form.save()
-            return redirect('division_detail', pk=division.pk)
-    else:
-        form = DivisionForm(instance=division)
-    return render(request, 'Division.html',
-                  {'form': form})
-
-def division_delete(request, pk):
-    division = get_object_or_404(Division, pk=pk)
-    if request.method == 'POST':
-        division.delete()
-        return redirect('division')
-    return render(request, 'Division.html',
-                  {'object': division})
+    campos = [field.name for field in Division._meta.fields]
+    return render(request, 'Division.html', {'resultados': resultados, 'campos': campos})

@@ -2,39 +2,65 @@
 {% extends "Base.html" %}
 
 <html lang="en">
+
 <head>
     <title>{%block title%}Suministrador{%endblock%}</title>
 </head>
-<body class="bg-white">
-<h1>Suministrador</h1>
-{%block content%}
-<div class="container">
-<table class="table">
-  <thead class="table-dark">
-  <tr class="tr">
-      <th>Id</th>
-      <th>Nombre</th>
-      <th>Calle</th>
-      <th>Num Calle</th>
-      <th>Municipio</th>
-      <th>Provincia</th>
-      <th>Clasificacion</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for suministrador in suministrador %}
-    <th>{{ suministrador.id}}</th>
-    <th>{{ suministrador.nombre}}</th>
-    <th>{{ suministrador.numero_calle}} </th>
-    <th>{{ suministrador.municipio}}</th>
-    <th>{{ suministrador.provincia}}</th>
-    <th>{{ suministrador.clasificacion}} años</th>
 
-  </tbody>
-     {% endfor %}
-</table>
-    {%endblock%}
-</div>
+<body class="bg-white">
+    {%block content%}
+    <h1 style="color: black;">Suministradores</h1>
+
+    <div class="container">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Buscar...">
+            <select name="campo">
+                <option value="">Todos los campos</option>
+                {% for campo in campos %}
+                <option value="{{ campo }}">{{ campo }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Buscar">
+        </form>
+
+        <table>
+
+
+            <thead class="table-dark">
+                <tr class="tr">
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Calle</th>
+                    <th>Num Calle</th>
+                    <th>Municipio</th>
+                    <th>Provincia</th>
+                    <th>Clasificación</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for resultado in resultados %}
+
+                <th>{{ suministrador.id}}</th>
+                <th>{{ suministrador.nombre}}</th>
+                <th>{{ suministrador.numero_calle}} </th>
+                <th>{{ suministrador.municipio}}</th>
+                <th>{{ suministrador.provincia}}</th>
+                <th>{{ suministrador.clasificacion}} años</th>
+            </tbody>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% if user.is_authenticated%}
+
+        <button><a href="http://localhost:8000/admin/app/abogado/add/">Agregar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/change/">Editar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/delete/">Eliminar</a></button>
+{%endif%}
+        {%endblock%}
+    </div>
 
 </body>
+
 </html>

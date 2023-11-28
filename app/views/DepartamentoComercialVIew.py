@@ -1,48 +1,27 @@
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
 from app.models.DepartamentoComercial import DepartamentoComercial
 from app.Forms.DepartamentoComercialForm import DepartamentoComercialForm
 
 
+@login_required()
+def buscar_departamentocomercial(request):
+    query = request.GET.get('q', '')
+    campo = request.GET.get('campo', '')
 
-def departamentocomercial_list(request):
-    departamentocomercial = DepartamentoComercial.objects.all()
-    return render(request, 'departamentocomercial.html',
-                  {'departamentocomerciales': departamentocomercial})
-
-def departamentocomercial_detail(request, pk):
-    departamentocomercial = get_object_or_404(DepartamentoComercialForm, pk=pk)
-    return render(request, 'DepartamentoComercial.html',
-                  {'departamentocomercial': departamentocomercial})
-
-def departamentocomercial_new(request):
-    if request.method == "POST":
-        form = DepartamentoComercialForm(request.POST)
-        if form.is_valid():
-            departamentocomercial = form.save()
-            return redirect('DepartamentoComercial.html'
-                            , pk=departamentocomercial.pk)
+    if query:  # Solo filtrar si se proporciona un término de búsqueda
+        if campo:
+            kwargs = {f'{campo}__icontains': query}
+            resultados = DepartamentoComercial.objects.filter(**kwargs)
+        else:
+            q_objects = Q()
+            for field in DepartamentoComercial._meta.fields:
+                q_objects |= Q(**{f'{field.name}__icontains': query})
+            resultados = DepartamentoComercial.objects.filter(q_objects)
     else:
-        form = DepartamentoComercialForm()
-    return render(request, 'DepartamentoComercial.html',
-                  {'form': form})
+        resultados = DepartamentoComercial.objects.all()  # Devolver todos los objetos si no se proporciona un término de búsqueda
 
-def departamentocomercial_edit(request, pk):
-    departamentocomercial = get_object_or_404(DepartamentoComercial, pk=pk)
-    if request.method == "POST":
-        form = DepartamentoComercialForm(request.POST, instance=departamentocomercial)
-        if form.is_valid():
-            departamentocomercial = form.save()
-            return redirect('departamentocomercial_detail', pk=departamentocomercial.pk)
-    else:
-        form = DepartamentoComercialForm(instance=departamentocomercial)
-    return render(request, 'DepartamentoComercial.html',
-                  {'form': form})
-
-def departamentocomercial_delete(request, pk):
-    departamentocomercial = get_object_or_404(DepartamentoComercial, pk=pk)
-    if request.method == 'POST':
-        departamentocomercial.delete()
-        return redirect('departamentocomercial')
-    return render(request, 'DepartamentoComercial.html',
-                  {'object': departamentocomercial})
+    campos = [field.name for field in DepartamentoComercial._meta.fields]
+    return render(request, 'DepartamentoComercial.html', {'resultados': resultados, 'campos': campos})

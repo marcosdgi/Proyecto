@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 {%extends "Base.html"%}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{%block title%}Asistente Control{%endblock%}</title>
 </head>
+
 <body>
-<h1>
-    Asistente Control
-</h1>
-{%block content%}
-<div class="container">
-<table class="table">
-  <thead class="table-dark">
-  <tr class="tr">
-      <th>Id</th>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Fecha_nacimiento</th>
-      <th>Edad</th>
-      <th>Experiencia</th>
-      <th>Ocupacion</th>
-      <th>Departamento</th>
-      <th>Grado Academico</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for asistente in asistentes %}
-    <th>{{ asistente.id}}</th>
-    <th>{{ asistente.nombre}}</th>
-    <th>{{ asistente.primer_apellido}} {{ asistente.segundo_apellido}}</th>
-    <th>{{ asistente.fecha_nacimiento}}</th>
-    <th>{{ asistente.edad}}</th>
-    <th>{{ asistente.annos_experiencia}} años</th>
-    <th>{{ asistente.ocupacion}}</th>
-    <th>{{ asistente.id_departamento}}</th>
-    <th>{{ asistente.grado_academico}}</th>
+    {%block content%}
+    <h1 style="color: black;">
+        Asistentes de Control
+    </h1>
+    <div class="container">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Buscar...">
+            <select name="campo">
+                <option value="">Todos los campos</option>
+                {% for campo in campos %}
+                <option value="{{ campo }}">{{ campo }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Buscar">
+        </form>
 
-  </tbody>
-     {% endfor %}
-</table>
+        <table>
+            <!-- Aquí van tus encabezados de tabla -->
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha_nacimiento</th>
+            <th>Edad</th>
+            <th>Experiencia</th>
+            <th>Ocupación</th>
+            <th>Departamento</th>
+            <th>Grado Académico</th>
+            <thead>
+                <tr class="tr">
+                </tr>
+            </thead>
+            {% for resultado in resultados %}
+            <tr>
+                <!-- Aquí van las celdas de la tabla -->
+                <th>{{ resultado.id}}</th>
+                <th>{{ resultado.nombre}}</th>
+                <th>{{ resultado.primer_apellido}} {{ resultado.segundo_apellido}}</th>
+                <th>{{ resultado.fecha_nacimiento}}</th>
+                <th>{{ resultado.edad}}</th>
+                <th>{{ resultado.annos_experiencia}} años</th>
+                <th>{{ resultado.ocupacion}}</th>
+                <th>{{ resultado.id_departamento}}</th>
+                <th>{{ resultado.grado_academico}}</th>
 
-{{form.as_p}}
 
-{%endblock%}
-</div>
+
+                </tbody>
+            </tr>
+            {% endfor %}
+        </table>
+        <table>
+        </table>
+        {% if user.is_authenticated%}
+
+        <button><a href="http://localhost:8000/admin/app/abogado/add/">Agregar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/change/">Editar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/delete/">Eliminar</a></button>
+    {%endif%}
+        {%endblock%}
+    </div>
 </body>
+
 </html>

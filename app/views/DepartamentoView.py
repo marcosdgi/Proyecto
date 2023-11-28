@@ -1,47 +1,27 @@
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
 from base.models.BaseDepartamento import BaseDepartamento
 from app.Forms.DepartamentoForm import DepartamentoForm
 
 
+@login_required
+def buscar_departamento(request):
+    query = request.GET.get('q', '')
+    campo = request.GET.get('campo', '')
 
-def departamento_list(request):
-    departamentos = BaseDepartamento.objects.all()
-    return render(request, 'Departamento.html',
-                  {'departamentos': departamentos})
-
-def departamento_detail(request, pk):
-    departamento = get_object_or_404(BaseDepartamento, pk=pk)
-    return render(request, 'Departamento.html',
-                  {'departamento': departamento})
-
-def departamento_new(request):
-    if request.method == "POST":
-        form = DepartamentoForm(request.POST)
-        if form.is_valid():
-            departamento = form.save()
-            return render(request,'Creado.html')
+    if query:  # Solo filtrar si se proporciona un término de búsqueda
+        if campo:
+            kwargs = {f'{campo}__icontains': query}
+            resultados = BaseDepartamento.objects.filter(**kwargs)
+        else:
+            q_objects = Q()
+            for field in BaseDepartamento._meta.fields:
+                q_objects |= Q(**{f'{field.name}__icontains': query})
+            resultados = BaseDepartamento.objects.filter(q_objects)
     else:
-        form = DepartamentoForm()
-    return render(request, 'Departamento.html',
-                  {'form': form})
+        resultados = BaseDepartamento.objects.all()  # Devolver todos los objetos si no se proporciona un término de búsqueda
 
-def departamento_edit(request, pk):
-    departamento = get_object_or_404(BaseDepartamento, pk=pk)
-    if request.method == "POST":
-        form = DepartamentoForm(request.POST, instance=departamento)
-        if form.is_valid():
-            departamento = form.save()
-            return redirect('departamento_detail', pk=departamento.pk)
-    else:
-        form = DepartamentoForm(instance=departamento)
-    return render(request, 'Departamento.html',
-                  {'form': form})
-
-def departamento_delete(request, pk):
-    departamento = get_object_or_404(BaseDepartamento, pk=pk)
-    if request.method == 'POST':
-        departamento.delete()
-        return redirect('departamentoes')
-    return render(request, 'Departamento.html',
-                  {'object': departamento})
+    campos = [field.name for field in BaseDepartamento._meta.fields]
+    return render(request, 'Departamento.html', {'resultados': resultados, 'campos': campos})

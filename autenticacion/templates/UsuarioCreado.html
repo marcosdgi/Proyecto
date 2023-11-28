@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{%extends "Base.html"%}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Usuario Creado{%endblock%}</title>
+</head>
+
+<body>
+    {%block content%}
+    {%if user%}
+    <h2>Usuario creado correctamente</h2>
+    {%endif%}
+    <input type="button" value="Aceptar" class="button" onclick="window.location.href='/login'">
+    {%endblock%}
+</body>
+
+</html>

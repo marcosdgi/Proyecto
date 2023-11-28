@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {%load static%}
+  <link rel="stylesheet" href="{% static 'css/Style.css'%}">
+  <meta charset="UTF-8">
+  <title>Iniciar Sesion</title>
+</head>
+
+<body id="loginbody">
+  <div style="background-color: #d3d3d366;backdrop-filter: blur(8px);
+  border-radius: 8px;
+  box-shadow: black 5px 10px 10px;">
+
+    <h1 style="color: black;">Portal de Inicio de Sesión de la Empresa Nacional de Materias Primas</h1>
+  </div>
+  <!-- Contenido principal -->
+  <div style="background-color: #d3d3d366;backdrop-filter: blur(8px); padding: 2px 37px;margin: 130px 300px;border-radius: 8px;
+  box-shadow: black 5px 10px 10px;" ">
+  <h1 style=" color: black;">
+    <button onclick="window.location.href='/'" style="background-color: transparent;">
+      <img src="{% static 'css/flecha.png' %}" width="30" />
+    </button>
+    Inicio de sesión
+    <hr>
+    </h1>
+    <div class="tab">
+      <!-- Contenido de la pestaña de inicio de sesión -->
+      <form action="" method="post">
+        {% csrf_token %}
+        <table>
+          {{form.as_table}}
+        </table>
+        <hr>
+        <div style="display: flex; justify-content: center;padding: 10px;">
+          <input type="submit" value="Aceptar" class="button">
+          <input type="button" value="Registrarse" class="button" onclick="window.location.href='/registro'">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

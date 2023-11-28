@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/Style.css'%}">
+    <meta charset="UTF-8">
+    <title>Regístrese</title>
+</head>
+
+<body id="loginbody">
+
+    <div style="background-color: #d3d3d366;backdrop-filter: blur(8px);border-radius: 10px;margin: 0 250px;box-shadow: black 5px 10px 10px;">
+        <h1 style="text-align: center;margin-top: 70px; color: black;">
+            Registro de usuario
+        </h1>
+        <hr>
+        <div class="container" style="background: none;">
+            <form action="" method="post" class="form"
+                style="display: flex;justify-content: center; margin-bottom: 20px;">{%csrf_token%}
+
+                <div>
+                    <div style="margin-left: 20px;">
+                        <div>
+                            <p>Nombre de Usuario</p> {{ FormularioRegistro.username }}
+
+                        </div>
+
+                        <div>
+                            <p>Email</p> {{ FormularioRegistro.email }}
+                        </div>
+                        <div>
+                            <p>Contraseña</p> {{ FormularioRegistro.password1 }}
+                        </div>
+                        <div>
+                            <p>Confirmar contraseña</p> {{ FormularioRegistro.password2 }}
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div style="margin-top: 30px;">
+
+                            <input type="submit" class="button" value="Aceptar">
+                            <input type="button" value="Cancelar" class="button"
+                                onclick="window.location.href='/login'">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -2,43 +2,67 @@
 {%extends "Base.html"%}
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{%block title%}Departamento Comercial{%endblock%}</title>
 </head>
+
 <body>
-{%block content%}
-<div class="container">
-<table class="table">
-  <thead class="table-dark">
-  <tr class="tr">
-      <th>Id</th>
-      <th>Nombre</th>
-      <th>Codigo</th>
-      <th>Descripcion</th>
-      <th>Fecha Comunicacion</th>
-      <th>Departamento Legal</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for departamento in departamentocomercial %}
-    <th>{{ departamento.id}}</th>
-    <th>{{ departameto.nombre}}</th>
-    <th>{{ departameto.codigo}}</th>
-    <th>{{ departameto.descripcion}}</th>
-    <th>{{ departameto.fecha_comunicacion}}</th>
-    <th>{{ departameto.id_DepartamentoLegal}}</th>
+    {%block content%}
+    <h1 style="color: black;">Departamentos Comerciales</h1>
+    <div class="container">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Buscar...">
+            <select name="campo">
+                <option value="">Todos los campos</option>
+                {% for campo in campos %}
+                <option value="{{ campo }}">{{ campo }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Buscar">
+        </form>
+
+        <table>
+            <!-- Aquí van tus encabezados de tabla -->
+            <thead>
+                <tr class="tr">
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Fecha Comunicación</th>
+                    <th>Departamento Legal</th>
+                </tr>
+            </thead>
+            {% for resultado in resultados %}
+            <tr>
+                <!-- Aquí van las celdas de la tabla -->
+                <th>{{ resultado.id}}</th>
+                <th>{{ resultado.nombre}}</th>
+                <th>{{ resultado.codigo}}</th>
+                <th>{{ resultado.descripcion}}</th>
+                <th>{{ resultado.fecha_comunicacion}}</th>
+                <th>{{ resultado.id_DepartamentoLegal}}</th>
 
 
-  </tbody>
- {% endfor %}
-</table>
-{{form.as_p}}
-{%endblock%}
-</div>
+                </tbody>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if user.is_authenticated%}
+
+        <button><a href="http://localhost:8000/admin/app/abogado/add/">Agregar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/change/">Editar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/delete/">Eliminar</a></button>
+
+{%endif%}
+        {%endblock%}
+    </div>
 
 
 
 
 </body>
+
 </html>

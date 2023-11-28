@@ -1,0 +1,55 @@
+<!DOCTYPE html {%extends "Base.html" %} <html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Informe{%endblock%}</title>
+</head>
+
+<body>
+    {%block content%}
+    <h1 style="color: black;">Informe</h1>
+    <div class="container">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Buscar...">
+            <select name="campo">
+                <option value="">Todos los campos</option>
+                {% for campo in campos %}
+                <option value="{{ campo }}">{{ campo }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Buscar">
+        </form>
+
+        <table>
+            <!-- Aquí van tus encabezados de tabla -->
+            <th>ID</th>
+            <th>Codigo</th>
+            <th>Modificaciones</th>
+            <thead>
+                <tr class="tr">
+
+                </tr>
+            </thead>
+            {% for resultado in resultados %}
+            <tr>
+                <!-- Aquí van las celdas de la tabla -->
+                <th>{{ resultado.id_contrato}}</th>
+                <th>{{ resultado.codigo}}</th>
+                <th>{{ resultado.modificaciones}} </th>
+
+
+                </tbody>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if user.is_authenticated%}
+
+     
+        <button><a href="http://localhost:8000/admin/app/abogado/add/">Agregar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/change/">Editar</a></button>
+        <button><a href="http://localhost:8000/admin/app/abogado/delete/">Eliminar</a></button>
+{%endif%}
+        {%endblock%}
+</body>
+
+</html>

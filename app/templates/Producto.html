@@ -2,34 +2,60 @@
 {% extends "Base.html" %}
 
 <html lang="en">
-<head>
-    <title>{%block title%}Suministrador{%endblock%}</title>
-</head>
-<body class="bg-white">
-{%block content%}
-<h1>Productos</h1>
-<div class="container">
-<table class="table">
-  <thead class="table-dark">
-  <tr class="tr">
-      <th>Id</th>
-      <th>Suministrador</th>
-      <th>Descripcion</th>
-      <th>Producido</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for producto in productos %}
-    <th>{{ producto.id}}</th>
-    <th>{{ producto.id_suministrador}}</th>
-    <th>{{ producto.descripcion}} </th>
-    <th>{{ producto.fecha_produccion}}</th>
 
-  </tbody>
-     {% endfor %}
-</table>
-    {%endblock%}
-</div>
+<head>
+    <title>{%block title%}Producto{%endblock%}</title>
+</head>
+
+<body class="bg-white">
+    {%block content%}
+
+    <h1 style="color: black;">Producto</h1>
+    <div class="container">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Buscar...">
+            <select name="campo">
+                <option value="">Todos los campos</option>
+                {% for campo in campos %}
+                <option value="{{ campo }}">{{ campo }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Buscar">
+        </form>
+
+        <table>
+
+
+            <thead>
+                <tr class="tr">
+                    <th>Id</th>
+                    <th>Suministrador</th>
+                    <th>Descripción</th>
+                    <th>Producido</th>
+                </tr>
+            </thead>
+
+
+            {% for resultado in resultados %}
+            <tr>
+                <th>{{ resultado.id}}</th>
+                <th>{{ resultado.id_suministrador}}</th>
+                <th>{{ resultado.descripcion}} </th>
+                <th>{{ resultado.fecha_produccion}}</th>
+
+
+                </tbody>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if user.is_authenticated%}
+
+                <button><a href="http://localhost:8000/admin/app/producto/add/">Agregar</a></button>
+                <button><a href="http://localhost:8000/admin/app/producto/change/">Editar</a></button>
+                <button><a href="http://localhost:8000/admin/app/producto/change/">Eliminar</a></button>
+{%endif%}
+        {%endblock%}
 
 </body>
+
 </html>

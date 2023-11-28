@@ -1,37 +1,61 @@
 <!DOCTYPE html>
 {%extends "Base.html"%}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{%block title%}Departamentos{%endblock%}</title>
 </head>
+
 <body>
-{%block content%}
-<div class="container">
-<table class="table">
-  <thead class="table-dark">
-  <tr class="tr">
-      <th>Id</th>
-      <th>Nombre</th>
-      <th>Direccion</th>
-      <th>Descripcion</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for departamento in departamentos %}
-    <th>{{ departamento.id}}</th>
-    <th>{{ departamento.nombre}}</th>
-    <th>{{ departamento.direccion}}</th>
-    <th>{{ departamento.descripcion}}</th>
+    {%block content%}
+    <h1 style="color: black;">Departamentos</h1>
+    <div class="container">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Buscar...">
+            <select name="campo">
+                <option value="">Todos los campos</option>
+                {% for campo in campos %}
+                <option value="{{ campo }}">{{ campo }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Buscar">
+        </form>
 
+        <table>
+            <!-- Aquí van tus encabezados de tabla -->
+            <thead>
+                <tr class="tr">
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Descripción</th>
 
-  </tbody>
- {% endfor %}
-</table>
+                </tr>
+            </thead>
+            {% for resultado in resultados %}
+            <tr>
+                <!-- Aquí van las celdas de la tabla -->
 
-{{form.as_p}}
-{%endblock%} %}
+                <th>{{ resultado.id}}</th>
+                <th>{{ resultado.nombre}}</th>
+                <th>{{ resultado.direccion}}</th>
+                <th>{{ resultado.descripcion}}</th>
 
-</div>
+                </tbody>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if user.is_authenticated%}
+
+        <button><a href="http://localhost:8000/admin/base/basedepartamento/add/">Agregar</a></button>
+        <button><a href="http://localhost:8000/admin/base/basedepartamento/change/">Editar</a></button>
+        <button><a href="http://localhost:8000/admin/base/basedepartamento/delete/">Eliminar</a></button>
+{%endif%}
+
+        {%endblock%}
+
+    </div>
 </body>
+
 </html>

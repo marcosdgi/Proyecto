@@ -15,3 +15,9 @@ class BaseTrabajador(models.Model):
     class Meta:
         verbose_name = 'Trabajador'
         verbose_name_plural = 'Trabajadores'
+
+    def __str__(self):
+        return('%s %s %s %s %s %s %s %s %s')%(self.id, self.nombre, self.primer_apellido,
+                                              self.segundo_apellido, self.fecha_nacimiento
+                                              ,self.edad, self.annos_experiencia,
+                                              self.ocupacion, self.id_departamento)

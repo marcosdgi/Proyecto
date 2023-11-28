@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {%load static%}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'css/Style.css'%}">
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
-</head>
-{%include "C:/Users/Developer/Desktop/proyecto/app/templates/Navbar.html"%}
-<body class="body-color">
-<div>
-{% block content %}
-{% endblock %}
-<button class= "btn btn-primary">Insertar</button>
-<button class= "btn btn-primary">Eliminar</button>
-<button class= "btn btn-primary">Editar</button>
-</div>
 
-{%include "C:/Users/Developer/Desktop/proyecto/app/templates/Footer.html"%}
+</head>
+
+<body>
+    <div>
+        <div>
+            {%include "C:/Users/Developer/Desktop/proyecto/app/templates/Navbar.html"%}
+        </div>
+        <div>
+            {% block content %}
+            {% endblock %}
+
+
+            {%if user.is_authenticated and user.is_staff %}
+            <!-- <button onclick="location.href='{% url 'admin:index' %}'" style="margin-top: 39px;">Agregar</button> -->
+            <!-- <button onclick="location.href='{% url 'admin:index' %}'" style="margin-top: 39px;">Editar</button> -->
+            <!-- <button onclick="location.href='{% url 'admin:index' %}'" style="margin-top: 39px;">Eliminar</button> -->
+                
+                {%endif%}
+        </div>
+    </div>
 </body>
+
 </html>
